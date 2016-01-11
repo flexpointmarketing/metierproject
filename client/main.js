@@ -4,6 +4,12 @@ Template.header.events({
 	}
 });
 
+Template.offScreenNav.events({
+	"click .close": function(e, t) {
+		document.querySelector('.off-screen-nav').classList.remove('show');
+	}
+});
+
 if (Meteor.isClient) {
 	Meteor.startup(function() {
 		

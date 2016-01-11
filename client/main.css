@@ -29,6 +29,8 @@
 	padding: 4px 12px;
 	font-size: 24px;
 	outline: 0 !important;
+	background: none;
+	color: #31b0d5;
 }
 
 /* End of Header */
@@ -40,7 +42,7 @@
 	right: -20%;
 	top: 0px;
 	z-index: 2000;
-	padding: 20px;
+	padding: 10px 0;
 	background-color: rgb(34, 34, 34);
 	height: 100%;
 	width: 100%;
@@ -49,6 +51,8 @@
 	-webkit-transition: right 0.3s ease;
 	-o-transition: right 0.3s ease;
 	transition: right 0.3s ease;
+	box-shadow: 0px 0px 3px rgb(34, 34, 34);
+	background: rgb(17, 17, 17) none repeat scroll
 }
 
 .off-screen-nav.show {
@@ -57,6 +61,36 @@
 	-webkit-transition: right 0.3s ease;
 	-o-transition: right 0.3s ease;
 	transition: right 0.3s ease;
+}
+
+.off-screen-nav .btn.close {
+	position: absolute;
+	right: 15px;
+	color: #5BC0DE;
+	opacity: 1;
+	text-shadow: none;
+	font-size: 28px;
+	outline: none !important;
+}
+
+.off-screen-nav ul {
+	list-style: none;
+	padding-left: 0;
+	margin-top: 45px;
+}
+
+.off-screen-nav ul li {
+	font-size: 18px;
+	padding: 20px 30px;
+	background: transparent linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.65) 100%) repeat scroll 0% 0%;
+	border-bottom: 1px solid rgb(0, 0, 0);
+	border-top: 1px solid rgb(17, 17, 17);
+	text-transform: uppercase;
+}
+
+.off-screen-nav ul li a {
+	text-decoration: none;
+	color: #5BC0DE;
 }
 
 /* End of Off Screen Nav */
