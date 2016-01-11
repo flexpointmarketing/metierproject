@@ -1,0 +1,62 @@
+/* Header */
+.header-wrapper {
+	max-height: 90px;
+	height: 100%;
+	background-color: rgba(255,255,255,0.8);
+}
+
+.header-wrapper .navbar-brand {
+	height: auto;
+	padding: 0px;
+	margin-left: 0 !important;
+}
+
+.header-wrapper .navbar-brand img {
+	height: 100%;
+	max-height: 90px;
+}
+
+.header-wrapper .navbar-right-wrapper {
+	float: right;
+}
+
+.header-wrapper .navbar-right {
+	margin-right: 0;
+	padding: 22px;
+}
+
+.header-wrapper .navbar-right button.btn {
+	padding: 4px 12px;
+	font-size: 24px;
+	outline: 0 !important;
+}
+
+/* End of Header */
+
+/* Off Screen Nav */
+
+.off-screen-nav {
+	position: fixed;
+	right: -20%;
+	top: 0px;
+	z-index: 2000;
+	padding: 20px;
+	background-color: rgb(34, 34, 34);
+	height: 100%;
+	width: 100%;
+	max-width: 20%;
+	-moz-transition: right 0.3s ease;
+	-webkit-transition: right 0.3s ease;
+	-o-transition: right 0.3s ease;
+	transition: right 0.3s ease;
+}
+
+.off-screen-nav.show {
+	right: 0;
+	-moz-transition: right 0.3s ease;
+	-webkit-transition: right 0.3s ease;
+	-o-transition: right 0.3s ease;
+	transition: right 0.3s ease;
+}
+
+/* End of Off Screen Nav */
