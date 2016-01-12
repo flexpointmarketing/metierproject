@@ -8,40 +8,141 @@
 <body>
 	<div class="container-fluid">
 		{{>header}}
-		
-		<div class="off-screen-nav">
-			{{>offScreenNav}}
-		</div>
+		{{>offScreenNav}}
+		{{>homeWrapper}}
+		{{>footer}}
 	</div>
 </body>
 
-<template name="header">
-	<nav class="header-wrapper navbar navbar-default navbar-fixed-top">
+<template name="homeWrapper">
+	<div class="main-wrapper">
 		<div class="container">
-			<div class="navbar-header">
-	  			<a class="navbar-brand" href="#">
-	  				<img src="logo.png" alt="Logo" class="img-responsive">
-	  			</a>
+			<div id="intro-wrapper" class="row">
+				<h1>Veterans of America,</h1>
+
+				<div class="desc">
+					<p>We are veterans on a mission to collect the stories of successful veterans transitions to share with separating service members</p>
+					<p>Our goal is to provide them the data they need to shorten the transition process and find better jobs sooner.</p>
+				</div>
+
+				<h4>Think you can't help? Think again.</h4>
+
+				{{>hrShortInnner}}
+
+				<div class="lets-do-btn">
+					<button class="btn btn-default"></button>
+				</div>
 			</div>
 
-			<div class="navbar-right-wrapper">
-				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<button class="nav-right-toggle btn btn-info">
-							<i class="fa fa-bars"></i>
-						</button>
-					</li>
-				</ul>
+			<div id="survey-wrapper" class="row">
+				<div class="desc">
+					<p>mé·tier (mĕ-tyā′, mā-tyā′) (noun)</p>
+
+					<p>Work or activity for which a person is particularly suited; one's specialty.</p>
+
+					<p>The Métier Project's mission is to compile and share stories of successful transitions to service members. By some estimates there are over 12,000 different career fields available today and that can be overwhelming to many service members that are unsure how to take their skills to the private sector. Through the Métier Project, service members and veterans will be able to see where others with similar military backgrounds found successful employment and connect with those that volunteer to answer questions regarding their own sector and job.</p>
+
+					<p>Helping only takes a minute to complete this simple 5 question Survey</p>
+				</div>
+
+				{{>hrShortInnner}}
+
+				<div class="lets-do-btn">
+					<button class="btn btn-default"></button>
+				</div>
+			</div>
+
+			<div id="survey-form-wrapper" class="row">
+				<form id="transition-survey-form">
+					<div class="form-head">Transition Survey</div>
+					{{>hSurveyFormSet1}}
+					{{>hSurveyFormSet2}}
+				</form>
 			</div>
 		</div>
-	</nav>
+	</div>
 </template>
 
-<template name="offScreenNav">
-	<button class="btn close"><i class="fa fa-times"></i></button>
-	<ul class="navigation">
-		<li class="nav-item"><a href="#">About Us</a></li>
-		<li class="nav-item"><a href="#">Contact Us</a></li>
-	</ul>
+<template name="hSurveyFormSet1">
+	<div id="set-one">
+		<div class="form-group">
+			<label for="">Name</label>
+			<input type="text" class="form-control" id="">
+		</div>
+
+		<div class="form-group">
+			<label for="">Email address</label>
+			<input type="email" class="form-control" id="">
+		</div>
+
+		<div class="inline-group">
+			<label>1. What was your</label>
+
+			<div class="form-group">
+				<label for="">Service Branch</label>
+				<input type="text" class="form-control">
+			</div>
+
+			<div class="form-group">
+				<label for="">Designator (AFSB, MOS, Rate)</label>
+				<input type="text" class="form-control">
+			</div>
+
+			<div class="form-group">
+				<label for="">Paygrade</label>
+				<input type="text" class="form-control">
+			</div>
+
+			<div class="form-group">
+				<label for="">2. When did you separate?</label>
+				<input type="text" class="form-control">
+			</div>
+
+			<div class="form-group">
+				<label for="">3. What job sector do you work in now?</label>
+				<select class="form-control">
+					<option></option>
+					<option>Finance</option>
+					<option>Government</option>
+					<option>Manufacturing</option>
+					<option>Business Services</option>
+					<option>Education</option>
+					<option>Healthcare</option>
+					<option>Retail / Wholesale</option>
+					<option>Information Technology</option>
+					<option>Arts and Entertainment</option>
+					<option>Construction</option>
+					<option>Transportation</option>
+					<option>Entrepreneurship</option>
+					<option>Misc</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label for="">4. What is your job title/position?</label>
+				<input type="text" class="form-control">
+			</div>
+		</div>
+		
+		<div class="submit-group">
+			<p>Thank you for helping</p>
+			<button type="submit" class="btn btn-default">Submit</button>
+		</div>
+	</div>
 </template>
 
+<template name="hSurveyFormSet2">
+	<div id="set-two">
+		{{#each questions}}
+			<div class="form-group">
+				<label for="">{{question}}</label>
+				<textarea class="form-control"></textarea>
+			</div>
+		{{/each}}
+
+		<div class="submit-group">
+			<p>Thank you for helping</p>
+			<button type="submit" class="btn btn-default">Submit</button>
+		</div>
+	</div>
+</template>

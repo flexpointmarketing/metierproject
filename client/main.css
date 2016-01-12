@@ -1,3 +1,5 @@
+/* General Stylings */
+
 /* Header */
 .header-wrapper {
 	max-height: 90px;
@@ -94,3 +96,83 @@
 }
 
 /* End of Off Screen Nav */
+
+/* Body */
+
+.hr {
+    clear: both;
+    display: block;
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    position: relative;
+    margin: 30px 0px;
+    float: left;
+}
+
+.hr-short {
+    height: 20px;
+    line-height: 20px;
+    margin: 30px 0px;
+    float: none;
+}
+
+.hr-inner {
+    position: absolute;
+    height: 1px;
+    left: 0px;
+    top: 50%;
+    width: 100%;
+    margin-top: -1px;
+    border-top-width: 1px;
+    border-top-style: solid;
+}
+
+.hr-short .hr-inner {
+    width: 32%;
+    left: 50%;
+    margin-left: -16%;
+    background-color: #FFF;
+}
+
+.hr-short .hr-inner-style {
+    border-radius: 20px;
+    height: 9px;
+    width: 9px;
+    border-width: 2px;
+    border-style: solid;
+    display: block;
+    position: absolute;
+    left: 50%;
+    margin-left: -5px;
+    margin-top: -5px;
+}
+
+/* End of Body */
+
+
+/*
+Desktop Styles
+================================================== */
+/* Note: Add new css to the media query below that you want to only effect the desktop view of your site */
+
+@media only screen and (min-width: 768px) {
+
+}
+
+/*
+Mobile Styles
+================================================== */
+/* Note: Add new css to the media query below that you want to only effect the Mobile and Tablet Portrait view */
+
+@media only screen and (max-width: 1024px) {
+
+}
+
+@media only screen and (max-width: 992px) {
+
+}
+
+@media only screen and (max-width: 767px) {
+  
+}
