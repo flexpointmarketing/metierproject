@@ -1,10 +1,18 @@
 /* General Stylings */
 
+@import url(https://fonts.googleapis.com/css?family=Lato:400,100,900italic,900,700,700italic,400italic,300italic,300,100italic&subset=latin,latin-ext);
+
+body > .container-fluid {
+	padding: 0;
+	font-family: 'Lato', sans-serif;
+}
+
 /* Header */
 .header-wrapper {
 	max-height: 90px;
 	height: 100%;
 	background-color: rgba(255,255,255,0.8);
+	margin-bottom: 0;
 }
 
 .header-wrapper .navbar-brand {
@@ -99,6 +107,34 @@
 
 /* Body */
 
+.main-wrapper > .container-fluid {
+	padding: 0
+}
+
+#intro-wrapper {
+	background: #0859b5; /* Old browsers */
+	background: -moz-linear-gradient(top, #0859b5 0%, #0563bd 32%, #0566c5 68%, #0471d0 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #0859b5 0%,#0563bd 32%,#0566c5 68%,#0471d0 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #0859b5 0%,#0563bd 32%,#0566c5 68%,#0471d0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0859b5', endColorstr='#0471d0',GradientType=0 ); /* IE6-9 */
+}
+
+#survey-wrapper {
+	background: #0471d0; /* Old browsers */
+	background: -moz-linear-gradient(top, #0471d0 0%, #0c79d8 25%, #297cd8 51%, #3681de 79%, #367cd4 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #0471d0 0%,#0c79d8 25%,#297cd8 51%,#3681de 79%,#367cd4 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #0471d0 0%,#0c79d8 25%,#297cd8 51%,#3681de 79%,#367cd4 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0471d0', endColorstr='#367cd4',GradientType=0 ); /* IE6-9 */
+
+	overflow: hidden;
+}
+
+#intro-wrapper > .container,
+#survey-wrapper > .container,
+#survey-form-wrapper > .container {
+	/*padding: 0;*/
+}
+
 .hr {
     clear: both;
     display: block;
@@ -133,6 +169,7 @@
     left: 50%;
     margin-left: -16%;
     background-color: #FFF;
+    border-color: #fff;
 }
 
 .hr-short .hr-inner-style {
@@ -146,9 +183,231 @@
     left: 50%;
     margin-left: -5px;
     margin-top: -5px;
+    border-color: #fff;
+	background-color: #fff;
+}
+
+#intro-wrapper > .container,
+#survey-wrapper > .container-fluid,
+#survey-form-wrapper > .container{
+	height: 100%;
+	display: table;
+	padding: 0px;
+}
+
+#intro-wrapper > .container > .row,
+#survey-wrapper > .container-fluid > .row,
+#survey-form-wrapper > .container > .row {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#intro-wrapper h1 {
+	font-size: 80px;
+	margin: 30px;
+	color: #fff;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+#intro-wrapper div.desc {
+	color: #fff;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#intro-wrapper div.desc p {
+	margin-bottom: 5px;
+}
+
+#intro-wrapper h4 {
+	font-size: 30px;
+	letter-spacing: 1px;
+	margin: 30px;
+	color: #fff;
+	font-weight: bold;
+}
+
+#intro-wrapper .lets-do-btn button {
+	width: 100%;
+	max-width: 200px;
+	display: inline-block;
+	background: transparent url("lets-do-blue-btn.png") no-repeat scroll center center / contain;
+	height: 150px;
+	border: none;
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+#survey-wrapper > .container-fluid {
+	position: relative;
+	width: 100%;
+}
+
+#survey-wrapper > .container-fluid > .row {
+	width: 100%;
+}
+
+#survey-wrapper > .container-fluid .scroll-p {
+	width: 100%;
+	height: 150%;
+	left: 0;
+	top: 0;
+	position: absolute;
+	background: transparent url("guy-girl-sunset-bg.png") no-repeat scroll center 0px;
+}
+
+#survey-wrapper > .container-fluid .desc {
+	color: #fff;
+	font-size: 20px;
+	margin: 10% auto 0;
+	padding-top: 10%;
+	max-width: 900px;
+}
+
+#survey-wrapper .lets-do-btn button {
+	width: 100%;
+	max-width: 200px;
+	display: inline-block;
+	background: transparent url("six-questions-survey-btn.png") no-repeat scroll center center / contain;
+	height: 150px;
+	border: none;
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+#survey-form-wrapper {
+	background-color: #000;
+}
+
+#survey-form-wrapper .form-wrapper {
+	padding: 80px 0;
+}
+
+#transition-survey-form {
+	max-width: 700px;
+	margin: auto;
+}
+
+#transition-survey-form .form-head {
+	font-size: 30px;
+	background-color: #A5D1F3;
+	text-align: center;
+	color: #000 !important;
+	padding: 30px 20px;
+	text-transform: uppercase;
+	font-weight: bold;
+	border-radius: 5px 5px 0px 0px;
+}
+
+#transition-survey-form .form-body {
+	padding: 30px 35px 40px;
+	background-color: #FFF;
+	border-radius: 0 0 5px 5px;
+}
+
+#transition-survey-form .form-body label {
+	font-size: 16px;
+	color: #000;
+	display: block;
+}
+
+#transition-survey-form .form-body .inline-group .form-group {
+	float: left;
+	margin-left: 5%;
+	width: 30%;
+}
+
+#transition-survey-form .form-body .inline-group .form-group:first-of-type {
+	margin-left: 0;
+}
+
+#transition-survey-form .form-body .inline-group .form-group label {
+	font-size: 14px;
+}
+
+#transition-survey-form .form-body .form-submit {
+	border: none;
+	width: 100%;
+	max-width: 300px;
+	background-color: #1694F0;
+	font-size: 20px;
+	text-align: center;
+	padding: 8px;
+	border-bottom: 4px solid #0C6CB3 !important;
+	color: #FFF;
+	cursor: pointer;
+	border-radius: 5px;
+	margin: 0px auto;
+	outline: none !important;
+}
+
+#transition-survey-form .form-body .form-do-more {
+	background: #A6D1F0 none repeat scroll 0% 0%;
+	color: #2D2E2D;
+	text-align: center;
+	font-size: 18px;
+	cursor: pointer;
+	border-radius: 10px;
+	font-weight: bold;
+	padding: 20px 0px 25px;
+}
+
+#transition-survey-form .form-body .form-do-more span {
+    text-transform: uppercase;
+    line-height: 30px;
+    font-size: 20px;
+    color: #008000;
+}
+
+#transition-survey-form .form-body .submit-group .helper-text {
+	margin: 20px 0px 10px;
 }
 
 /* End of Body */
+
+/* Footer */
+
+div.footer {
+    background-color: #171717;
+    border-top: 1px solid #575757;
+    color: #FFF;
+    font-size: 11px;
+    margin-top: -1px;
+    z-index: 1;
+    padding: 20px;
+}
+
+div.footer .bottom-menu ul {
+	list-style: none;
+	padding: 0;
+	text-align: right;
+	margin: 0;
+}
+
+div.footer .bottom-menu ul li:before {
+	content: '|';
+}
+
+div.footer .bottom-menu ul li {
+	display: inline;
+}
+
+div.footer .bottom-menu ul li:first-child:before {
+	content: '';
+}
+
+div.footer .bottom-menu ul li a {
+	color: #fff;
+	padding: 0 8px;
+}
+
+div.footer .bottom-menu ul li:last-child a {
+	padding-right: 0;
+}
+
+
+/* End of Footer */
 
 
 /*
