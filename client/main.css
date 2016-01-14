@@ -7,6 +7,10 @@ body > .container-fluid {
 	font-family: 'Lato', sans-serif;
 }
 
+select {
+	outline: none !important;
+}
+
 /* Header */
 .header-wrapper {
 	max-height: 90px;
@@ -136,54 +140,54 @@ body > .container-fluid {
 }
 
 .hr {
-    clear: both;
-    display: block;
-    width: 100%;
-    height: 25px;
-    line-height: 25px;
-    position: relative;
-    margin: 30px 0px;
-    float: left;
+	clear: both;
+	display: block;
+	width: 100%;
+	height: 25px;
+	line-height: 25px;
+	position: relative;
+	margin: 30px 0px;
+	float: left;
 }
 
 .hr-short {
-    height: 20px;
-    line-height: 20px;
-    margin: 30px 0px;
-    float: none;
+	height: 20px;
+	line-height: 20px;
+	margin: 30px 0px;
+	float: none;
 }
 
 .hr-inner {
-    position: absolute;
-    height: 1px;
-    left: 0px;
-    top: 50%;
-    width: 100%;
-    margin-top: -1px;
-    border-top-width: 1px;
-    border-top-style: solid;
+	position: absolute;
+	height: 1px;
+	left: 0px;
+	top: 50%;
+	width: 100%;
+	margin-top: -1px;
+	border-top-width: 1px;
+	border-top-style: solid;
 }
 
 .hr-short .hr-inner {
-    width: 32%;
-    left: 50%;
-    margin-left: -16%;
-    background-color: #FFF;
-    border-color: #fff;
+	width: 32%;
+	left: 50%;
+	margin-left: -16%;
+	background-color: #FFF;
+	border-color: #fff;
 }
 
 .hr-short .hr-inner-style {
-    border-radius: 20px;
-    height: 9px;
-    width: 9px;
-    border-width: 2px;
-    border-style: solid;
-    display: block;
-    position: absolute;
-    left: 50%;
-    margin-left: -5px;
-    margin-top: -5px;
-    border-color: #fff;
+	border-radius: 20px;
+	height: 9px;
+	width: 9px;
+	border-width: 2px;
+	border-style: solid;
+	display: block;
+	position: absolute;
+	left: 50%;
+	margin-left: -5px;
+	margin-top: -5px;
+	border-color: #fff;
 	background-color: #fff;
 }
 
@@ -260,7 +264,7 @@ body > .container-fluid {
 #survey-wrapper > .container-fluid .desc {
 	color: #fff;
 	font-size: 20px;
-	margin: 10% auto 0;
+	margin: 20% auto 0;
 	padding-top: 10%;
 	max-width: 900px;
 }
@@ -338,7 +342,7 @@ body > .container-fluid {
 	color: #FFF;
 	cursor: pointer;
 	border-radius: 5px;
-	margin: 0px auto;
+	margin: 0px auto 20px;
 	outline: none !important;
 }
 
@@ -350,18 +354,22 @@ body > .container-fluid {
 	cursor: pointer;
 	border-radius: 10px;
 	font-weight: bold;
-	padding: 20px 0px 25px;
+	padding: 20px 5px 25px;
 }
 
 #transition-survey-form .form-body .form-do-more span {
-    text-transform: uppercase;
-    line-height: 30px;
-    font-size: 20px;
-    color: #008000;
+	text-transform: uppercase;
+	line-height: 30px;
+	font-size: 20px;
+	color: #008000;
 }
 
 #transition-survey-form .form-body .submit-group .helper-text {
 	margin: 20px 0px 10px;
+}
+
+#transition-survey-form .form-body #set-two {
+	display: none;
 }
 
 /* End of Body */
@@ -369,13 +377,13 @@ body > .container-fluid {
 /* Footer */
 
 div.footer {
-    background-color: #171717;
-    border-top: 1px solid #575757;
-    color: #FFF;
-    font-size: 11px;
-    margin-top: -1px;
-    z-index: 1;
-    padding: 20px;
+	background-color: #171717;
+	border-top: 1px solid #575757;
+	color: #FFF;
+	font-size: 11px;
+	margin-top: -1px;
+	z-index: 1;
+	padding: 20px;
 }
 
 div.footer .bottom-menu ul {
@@ -424,14 +432,130 @@ Mobile Styles
 ================================================== */
 /* Note: Add new css to the media query below that you want to only effect the Mobile and Tablet Portrait view */
 
+@media only screen and (max-width: 1200px) {
+	#intro-wrapper h1 {
+		font-size: 60px;
+	}
+
+	#intro-wrapper div.desc {
+		font-size: 16px;
+	}
+
+	#intro-wrapper h4 {
+		font-size: 28px;
+	}
+}
+
 @media only screen and (max-width: 1024px) {
 
 }
 
 @media only screen and (max-width: 992px) {
+	#intro-wrapper h1 {
+		font-size: 40px;
+	}
 
+	#intro-wrapper div.desc {
+		font-size: 12px;
+	}
+
+	#intro-wrapper h4 {
+		font-size: 24px;
+	}
+
+	#intro-wrapper .hr-short,
+	#survey-wrapper .hr-short {
+		margin: 0;
+	}
+
+	#survey-wrapper > .container-fluid .desc {
+		font-size: 14px;
+	}
 }
 
 @media only screen and (max-width: 767px) {
-  
+	.header-wrapper .navbar-header {
+		display: inline-block;
+		margin-left: 5px;
+	}
+
+	.header-wrapper .navbar-brand img {
+		max-height: 70px;
+		margin-top: 10px;
+	}
+
+	.header-wrapper .navbar-right {
+		margin: 0;
+	}
+
+	.off-screen-nav {
+		right: -50%;
+		max-width: 50%;
+	}
+
+	#transition-survey-form .form-body .inline-group .form-group {
+		width: 100%;
+		margin-left: 0;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.off-screen-nav {
+		right: -100%;
+		max-width: 100%;
+	}
+
+	#intro-wrapper h1 {
+		font-size: 25px;
+		margin: 20px 0;
+		line-height: normal;
+	}
+
+	#intro-wrapper h4 {
+		font-size: 16px;
+		margin: 20px 0;
+	}
+
+	#survey-wrapper > .container-fluid .desc {
+		padding-top: 15%;
+	}
+}
+
+@media only screen and (max-width: 414px) {
+	.header-wrapper {
+		max-height: unset;
+	}
+
+	.header-wrapper .navbar-header {
+		display: block;
+		text-align: center;
+		margin: 0px;
+	}
+
+	.header-wrapper .navbar-brand {
+		width: 100%;
+	}
+
+	.header-wrapper .navbar-brand img {
+		margin: 0 auto;
+		max-height: 60px;
+	}
+
+	.header-wrapper .navbar-right-wrapper {
+		width: 100%;
+		text-align: center;
+	}
+
+	.header-wrapper .navbar-right {
+		padding: 0px;
+		margin: 0px 0px 10px;
+	}
+
+	.header-wrapper .navbar-right button.btn {
+		font-size: 20px;
+	}
+
+	#survey-wrapper > .container-fluid .desc {
+	    padding-top: 20%;
+	}
 }

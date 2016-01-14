@@ -76,7 +76,7 @@
 								<div class="form-head">Transition Survey</div>
 								<div class="form-body">
 									{{>hSurveyFormSet1}}
-									<!-- {{>hSurveyFormSet2}} -->
+									{{>hSurveyFormSet2}}
 								</div>
 							</form>
 						</div>
@@ -91,12 +91,12 @@
 	<div id="set-one">
 		<div class="form-group">
 			<label for="">Name</label>
-			<input type="text" class="form-control" id="">
+			<input type="text" class="form-control" name="name">
 		</div>
 
 		<div class="form-group">
-			<label for="">Email address</label>
-			<input type="email" class="form-control" id="">
+			<label for="">Email Address</label>
+			<input type="email" class="form-control" name="email">
 		</div>
 
 		<div class="inline-group">
@@ -104,17 +104,17 @@
 
 			<div class="form-group">
 				<label for="">Service Branch</label>
-				<input type="text" class="form-control">
+				<input type="text" class="form-control" name="branch">
 			</div>
 
 			<div class="form-group">
 				<label for="">Designator (AFSB, MOS, Rate)</label>
-				<input type="text" class="form-control">
+				<input type="text" class="form-control" name="designator">
 			</div>
 
 			<div class="form-group">
 				<label for="">Paygrade</label>
-				<input type="text" class="form-control">
+				<input type="text" class="form-control" name="paygrade">
 			</div>
 		</div>
 
@@ -122,12 +122,12 @@
 
 		<div class="form-group">
 			<label for="">2. When did you separate?</label>
-			<input type="text" class="form-control datepicker">
+			<input type="text" class="form-control datepicker" name="separate">
 		</div>
 
 		<div class="form-group">
 			<label for="">3. What job sector do you work in now?</label>
-			<select class="form-control">
+			<select class="form-control" name="sector">
 				<option></option>
 				<option>Finance</option>
 				<option>Government</option>
@@ -147,17 +147,17 @@
 
 		<div class="form-group">
 			<label for="">4. What is your job title/position?</label>
-			<input type="text" class="form-control">
+			<input type="text" class="form-control" name="position">
 		</div>
 		
 		<div class="submit-group">
 			<div class="row">
-				<div class="col-sm-6">
-					<p class="text-center helper-text">Thank you for helping</p>
+				<div class="col-sm-6 text-center">
+					<p class="helper-text">Thank you for helping</p>
 					<button type="submit" class="btn btn-default form-submit">Submit</button>
 				</div>
 				<div class="col-sm-6">
-					<div class="form-do-more">
+					<div id="form-do-more" class="form-do-more">
 						<span>I want to do more!</span><br>
 						Give us 10 more minutes and
 						complete a few more questions
@@ -177,8 +177,8 @@
 			</div>
 		{{/each}}
 
-		<div class="submit-group">
-			<p class="text-center helper-text">Thank you for helping</p>
+		<div class="submit-group text-center">
+			<p class="helper-text">Thank you for helping</p>
 			<button type="submit" class="btn btn-default form-submit">Submit</button>
 		</div>
 	</div>

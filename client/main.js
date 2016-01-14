@@ -1,3 +1,10 @@
+function ucwords(str) {
+	return (str + '')
+	.replace(/^([a-z\u00E0-\u00FC])|\s+([a-z\u00E0-\u00FC])/g, function($1) {
+		return $1.toUpperCase();
+	});
+}
+
 var wrapperResize = function() {
 	var h = window.innerHeight;
 	var x = Math.round(h * 0.75);
@@ -42,26 +49,130 @@ Template.offScreenNav.events({
 	}
 });
 
+Template.homeWrapper.events({
+	'click #first-ld-btn': function(e, t) {
+		$('html,body').animate({
+			scrollTop: $("#survey-wrapper").offset().top
+		}, 'slow');
+	},
+	'click #second-ld-btn': function(e, t) {
+		$('html,body').animate({
+			scrollTop: $("#survey-form-wrapper").offset().top
+		}, 'slow');
+	},
+	'submit #transition-survey-form': function(e, t) {
+		e.preventDefault();
+	}
+});
+
+Template.hSurveyFormSet1.events({
+	'click #form-do-more': function(e, t) {
+		$('#transition-survey-form').formValidation({
+			framework: 'bootstrap',
+			icon: {
+				valid: 'glyphicon glyphicon-ok',
+				invalid: 'glyphicon glyphicon-remove',
+				validating: 'glyphicon glyphicon-refresh'
+			},
+			err: {
+				// You can set it to popover
+				// The message then will be shown in Bootstrap popover
+				container: 'tooltip'
+			},
+			fields: {
+				name: {
+					validators: {
+						notEmpty: {
+							message: 'The name is required'
+						}
+					}
+				},
+				email: {
+					validators: {
+						notEmpty: {
+							message: 'The email address is required'
+						},
+						emailAddress: {
+							message: 'The input is not a valid email address'
+						}
+					}
+				},
+				branch: {
+					validators: {
+						notEmpty: {
+							message: 'The service branch is required'
+						}
+					}
+				},
+				designator: {
+					validators: {
+						notEmpty: {
+							message: 'The designator is required'
+						}
+					}
+				},
+				paygrade: {
+					validators: {
+						notEmpty: {
+							message: 'The paygrade is required'
+						}
+					}
+				},
+				separate: {
+					validators: {
+						notEmpty: {
+							message: 'The date of separated is required'
+						}
+					}
+				},
+				sector: {
+					validators: {
+						notEmpty: {
+							message: 'The job sector is required'
+						}
+					}
+				},
+				position: {
+					validators: {
+						notEmpty: {
+							message: 'The job title/position is required'
+						}
+					}
+				}
+			}
+		})
+		.on('success.form.fv', function(e) {
+			$('#transition-survey-form #set-one').css('display', 'none');
+			$('#transition-survey-form #set-two').css('display', 'block');
+
+			$('#transition-survey-form #set-two button')
+			.attr('disabled', false)
+			.removeClass('disabled');
+		})
+		.formValidation('validate');
+	}
+});
+
 Template.hSurveyFormSet2.helpers({
 	questions: [
 		{
-			qid: 'question-5',
+			qid: 'question-05',
 			question: '5. Describe how you got to this job/position and what from your military experience set you up to be successful?'
 		},
 		{
-			qid: 'question-6',
+			qid: 'question-06',
 			question: '6. What were weaknesses from military experience that you had to overcome to be successful in this career?'
 		},
 		{
-			qid: 'question-7',
+			qid: 'question-07',
 			question: '7. Describe that initial transition process and where you found yourself stuck?'
 		},
 		{
-			qid: 'question-8',
+			qid: 'question-08',
 			question: '8. How did you overcome that obstacle?'
 		},
 		{
-			qid: 'question-9',
+			qid: 'question-09',
 			question: '9. How did you find your passion?'
 		},
 		{
@@ -107,25 +218,143 @@ Template.hSurveyFormSet2.helpers({
 	]
 });
 
-Template.homeWrapper.events({
-	'click #first-ld-btn': function(e, t) {
-		$('html,body').animate({
-			scrollTop: $("#survey-wrapper").offset().top
-		}, 'slow');
-	},
-	'click #second-ld-btn': function(e, t) {
-		$('html,body').animate({
-			scrollTop: $("#survey-form-wrapper").offset().top
-		}, 'slow');
-	}
-});
-
 Template.homeWrapper.rendered = function() {
 	wrapperResize();
 }
 
 Template.hSurveyFormSet1.rendered = function() {
 	$('.datepicker').datepicker();
+
+	$('#transition-survey-form').formValidation({
+		framework: 'bootstrap',
+		icon: {
+			valid: 'glyphicon glyphicon-ok',
+			invalid: 'glyphicon glyphicon-remove',
+			validating: 'glyphicon glyphicon-refresh'
+		},
+		err: {
+			// You can set it to popover
+			container: 'tooltip'
+		},
+		fields: {
+			name: {
+				validators: {
+					notEmpty: {
+						message: 'The name is required'
+					}
+				}
+			},
+			email: {
+				validators: {
+					notEmpty: {
+						message: 'The email address is required'
+					},
+					emailAddress: {
+						message: 'The input is not a valid email address'
+					}
+				}
+			},
+			branch: {
+				validators: {
+					notEmpty: {
+						message: 'The service branch is required'
+					}
+				}
+			},
+			designator: {
+				validators: {
+					notEmpty: {
+						message: 'The designator is required'
+					}
+				}
+			},
+			paygrade: {
+				validators: {
+					notEmpty: {
+						message: 'The paygrade is required'
+					}
+				}
+			},
+			separate: {
+				trigger: 'blur',
+				validators: {
+					notEmpty: {
+						message: 'The date of separated is required'
+					},
+					date: {
+                        format: 'MM/DD/YYYY',
+                        message: 'The date of separated is not valid'
+                    }
+				}
+			},
+			sector: {
+				validators: {
+					notEmpty: {
+						message: 'The job sector is required'
+					}
+				}
+			},
+			position: {
+				validators: {
+					notEmpty: {
+						message: 'The job title/position is required'
+					}
+				}
+			}
+		}
+	})
+	.on('success.form.fv', function(e) {
+		// The e parameter is same as one
+		// in the prevalidate.form.fv event above
+		var data = {
+			name: ucwords($('#set-one input[name="name"]').val()),
+			email: $('#set-one input[name="email"]').val(),
+			questions: [
+				{
+					qid: 'question-01',
+					answer: {
+						branch: ucwords($('#set-one input[name="branch"]').val()),
+						designator: $('#set-one input[name="designator"]').val(),
+						paygrade: $('#set-one input[name="paygrade"]').val()
+					}
+				},
+				{
+					qid: 'question-02',
+					answer: $('#set-one input[name="separate"]').val()
+				},
+				{
+					qid: 'question-03',
+					answer: $('#set-one select[name="sector"]').val()
+				},
+				{
+					qid: 'question-04',
+					answer: ucwords($('#set-one input[name="position"]').val())
+				}
+			],
+			created: new Date()
+		};
+
+		if ($('#set-two').css('display') != 'none') {
+			for (var x = 5; x < 20; x++) {
+				if (x < 10) {
+					x = '0' + x;
+				}
+
+				if ($.trim($('#set-two #question-'+x).val()) != '') {
+					var o = {
+						qid: 'question-'+x,
+						answer: $('#set-two #question-'+x).val()
+					}
+
+					data.questions.push(o);
+				}
+			}
+		}
+
+		Meteor.call('addSurvey', data, function(err, res) {
+			console.log('survey added');
+		});
+	});
 }
 
 if (Meteor.isClient) {
