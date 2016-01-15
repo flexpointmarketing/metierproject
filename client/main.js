@@ -17,7 +17,7 @@ var wrapperResize = function() {
 	var el2Height = el2.innerHeight();
 	var el3Height = el3.innerHeight();
 
-	if (el1Height > h) {
+	if (el1Height > x) {
 		el1.css('height', el1Height + 'px');
 	} else {
 		el1.css('height', x + 'px');
@@ -40,24 +40,38 @@ var wrapperResize = function() {
 Template.header.events({
 	"click .nav-right-toggle": function(e, t) {
 		document.querySelector('.off-screen-nav').classList.add('show');
+	},
+	"click .navbar-brand": function(e, t) {
+		var x = $('.off-screen-nav');
+
+		if (x.hasClass('show')) {
+			x.removeClass('show');
+		}
 	}
 });
 
 Template.offScreenNav.events({
 	"click .close": function(e, t) {
 		document.querySelector('.off-screen-nav').classList.remove('show');
+	},
+	"click a": function(e, t) {
+		var x = $('.off-screen-nav');
+
+		if (x.hasClass('show')) {
+			x.removeClass('show');
+		}
 	}
 });
 
 Template.homeWrapper.events({
 	'click #first-ld-btn': function(e, t) {
 		$('html,body').animate({
-			scrollTop: $("#survey-wrapper").offset().top
+			scrollTop: $("#survey-wrapper").offset().top - 46
 		}, 'slow');
 	},
 	'click #second-ld-btn': function(e, t) {
 		$('html,body').animate({
-			scrollTop: $("#survey-form-wrapper").offset().top
+			scrollTop: $("#survey-form-wrapper").offset().top - 46
 		}, 'slow');
 	},
 	'submit #transition-survey-form': function(e, t) {
@@ -220,6 +234,34 @@ Template.hSurveyFormSet2.helpers({
 
 Template.homeWrapper.rendered = function() {
 	wrapperResize();
+
+	$(window).resize(function(evt) {
+		wrapperResize();
+	});
+
+	// Create cross browser requestAnimationFrame method:
+	window.requestAnimationFrame = window.requestAnimationFrame
+	 || window.mozRequestAnimationFrame
+	 || window.webkitRequestAnimationFrame
+	 || window.msRequestAnimationFrame
+	 || function(f){setTimeout(f, 1000/60)}
+	 
+	var ggBg1 = document.querySelector('#survey-wrapper .scroll-p');
+
+	function parallaxImg() {
+		var scrolltop = window.pageYOffset; // get number of pixels document has scrolled vertically 
+		
+		ggBg1.style.top = -scrolltop * .2 + 'px'; // move img at 20% of scroll rate
+		ggBg1.style.backgroundPosition = 'center ' + scrolltop * .3 + 'px';
+	}
+
+	window.addEventListener('scroll', function(){ // on page scroll
+		requestAnimationFrame(parallaxImg); // call parallaxImg() on next available screen paint
+	}, false);
+
+	window.addEventListener('mousewheel', function() {
+		requestAnimationFrame(parallaxImg);
+	}, false);
 }
 
 Template.hSurveyFormSet1.rendered = function() {
@@ -282,9 +324,9 @@ Template.hSurveyFormSet1.rendered = function() {
 						message: 'The date of separated is required'
 					},
 					date: {
-                        format: 'MM/DD/YYYY',
-                        message: 'The date of separated is not valid'
-                    }
+						format: 'MM/DD/YYYY',
+						message: 'The date of separated is not valid'
+					}
 				}
 			},
 			sector: {
@@ -352,39 +394,93 @@ Template.hSurveyFormSet1.rendered = function() {
 		}
 
 		Meteor.call('addSurvey', data, function(err, res) {
-			console.log('survey added');
+			window.location.href = '/thank-you';
 		});
 	});
 }
 
-if (Meteor.isClient) {
-	Meteor.startup(function() {
-		$(window).resize(function(evt) {
-			wrapperResize();
-		});
+var sPosition = window.pageYOffset; // should start at 0
 
-		// Create cross browser requestAnimationFrame method:
-		window.requestAnimationFrame = window.requestAnimationFrame
-		 || window.mozRequestAnimationFrame
-		 || window.webkitRequestAnimationFrame
-		 || window.msRequestAnimationFrame
-		 || function(f){setTimeout(f, 1000/60)}
-		 
-		var ggBg1 = document.querySelector('#survey-wrapper .scroll-p');
+Meteor.startup(function() {
+	// Create cross browser requestAnimationFrame method:
+	window.requestAnimationFrame = window.requestAnimationFrame
+	 || window.mozRequestAnimationFrame
+	 || window.webkitRequestAnimationFrame
+	 || window.msRequestAnimationFrame
+	 || function(f){setTimeout(f, 1000/60)}
 
-		function parallaxImg() {
-			var scrolltop = window.pageYOffset; // get number of pixels document has scrolled vertically 
-			
-			ggBg1.style.top = -scrolltop * .2 + 'px'; // move img at 20% of scroll rate
-			ggBg1.style.backgroundPosition = 'center ' + scrolltop * .3 + 'px';
+	function shrinkHeader(scrolltop) {
+		var scrolltop = window.pageYOffset; // get number of pixels document has scrolled vertically 
+		var el = $('nav.header-wrapper > .container');
+		var el2 = $('.header-wrapper .navbar-brand img');
+		var height = el.innerHeight();
+		var height2 = el2.innerHeight();
+
+		if (scrolltop > sPosition) {
+			// scrolling downwards
+			var min = scrolltop - sPosition;
+			var h = height - min;
+
+			if (h <= 46) {
+				el.css('max-height', '46px');
+				el2.css('max-height', '46px');
+			} else {
+				el.css('max-height', h + 'px');
+				el2.css('max-height', h + 'px');
+			}
+
+		} else {
+			// scrolling upwards
+			var plus = sPosition - scrolltop;
+			var h = height + plus;
+
+			if (h >= 88) {
+				el.css('max-height', '88px');
+				el2.css('max-height', '88px');
+			} else {
+				el.css('max-height', h + 'px');
+				el2.css('max-height', h + 'px');
+			}
 		}
 
-		window.addEventListener('scroll', function(){ // on page scroll
-			requestAnimationFrame(parallaxImg); // call parallaxImg() on next available screen paint
-		}, false);
+		sPosition = scrolltop;
+	}
 
-		window.addEventListener('mousewheel', function() {
-			requestAnimationFrame(parallaxImg);
-		}, false);
-	});
-}
+	window.addEventListener('scroll', function(){ // on page scroll
+		var offset = window.pageYOffset;
+
+		if (sPosition > 0 && sPosition < 48) {
+			requestAnimationFrame(function() {
+				shrinkHeader();
+			});
+		} else if (offset <= 0) {
+			var el = $('nav.header-wrapper > .container');
+			var el2 = $('.header-wrapper .navbar-brand img');
+
+			el.css('max-height', '88px');
+			el2.css('max-height', '88px');
+
+			sPosition = 0;
+		} else {
+			sPosition = window.pageYOffset;
+		}
+	}, false);
+
+	window.addEventListener('mousewheel', function() {
+		if (sPosition > 0 && sPosition < 48) {
+			requestAnimationFrame(function() {
+				shrinkHeader();
+			});
+		} else if (offset <= 0) {
+			var el = $('nav.header-wrapper > .container');
+			var el2 = $('.header-wrapper .navbar-brand img');
+
+			el.css('max-height', '88px');
+			el2.css('max-height', '88px');
+
+			sPosition = 0;
+		} else {
+			sPosition = window.pageYOffset;
+		}
+	}, false);
+});

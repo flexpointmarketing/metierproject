@@ -1,0 +1,10 @@
+<template name="generalAppLayout">
+	<div class="container-fluid">
+		{{> yield "header"}}
+		{{> yield "aside"}}
+
+		{{> yield}}
+
+		{{> yield "footer"}}
+	</div>
+</template>
