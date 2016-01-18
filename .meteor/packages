@@ -22,3 +22,6 @@ twbs:bootstrap
 fortawesome:fontawesome
 rajit:bootstrap3-datepicker
 iron:router
+altapp:recaptcha
+ejson
+email

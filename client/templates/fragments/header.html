@@ -9,11 +9,20 @@
 
 			<div class="navbar-right-wrapper">
 				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<button class="nav-right-toggle btn btn-info">
+					<li class="dropdown">
+						<button data-toggle="dropdown" class="dropdown-toggle nav-right-toggle btn btn-info">
 							<i class="fa fa-bars"></i>
 						</button>
+						<ul class="dropdown-menu">
+							<li><a id="first-ld-link">Take Survey</a></li>
+							<li><a href="/about-us">About Us</a></li>
+							<li><a href="/contact-us">Contact Us</a></li>
+							<li class="divider"></li>
+                			<li><a>Please Call 253-235-3045</a></li>
+						</ul>
 					</li>
+
+
 				</ul>
 			</div>
 		</div>
@@ -21,11 +30,11 @@
 </template>
 
 <template name="offScreenNav">
-	<div class="off-screen-nav">
+	<!-- <div class="off-screen-nav">
 		<button class="btn close"><i class="fa fa-times"></i></button>
 		<ul class="navigation">
 			<li class="nav-item"><a href="/about-us">About Us</a></li>
 			<li class="nav-item"><a href="/contact-us">Contact Us</a></li>
 		</ul>
-	</div>
+	</div> -->
 </template>

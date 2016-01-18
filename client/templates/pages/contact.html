@@ -4,8 +4,38 @@
 			<div id="contact-wrapper">
 				<div class="container">
 					<div class="row">
-						<div class="col-sm-12">
+						<div class="col-sm-8">
 							<h1>Contact Us</h1>
+							
+							<form id="contact-form">
+								<div class="form-group">
+									<label for="">Name</label>
+									<input type="text" class="form-control" name="name">
+								</div>
+
+								<div class="form-group">
+									<label for="">Email Address</label>
+									<input type="email" class="form-control" name="email">
+								</div>
+
+								<div class="form-group">
+									<label for="">Subject</label>
+									<input type="text" class="form-control" name="subject">
+								</div>
+
+								<div class="form-group">
+									<label for="">Message</label>
+									<textarea class="form-control" name="message"></textarea>
+								</div>
+
+								{{> reCAPTCHA}}
+								<div class="help-block captcha-errors"></div>
+
+								<button class="btn btn-lg" type="submit">Submit</button>
+								<img class="loader hide" src="ring.gif">
+								<div class="helper-block success"></div>
+								<div class="helper-block error"></div>
+							</form>
 						</div>
 					</div>
 				</div>

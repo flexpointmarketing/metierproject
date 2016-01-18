@@ -38,15 +38,17 @@ var wrapperResize = function() {
 }
 
 Template.header.events({
-	"click .nav-right-toggle": function(e, t) {
-		document.querySelector('.off-screen-nav').classList.add('show');
+	// "click .nav-right-toggle": function(e, t) {
+	// 	document.querySelector('.off-screen-nav').classList.add('show');
+	// },
+	"click .dropdown-menu": function(e, t) {
+		$('.dropdown').toggleClass("open");
 	},
-	"click .navbar-brand": function(e, t) {
-		var x = $('.off-screen-nav');
-
-		if (x.hasClass('show')) {
-			x.removeClass('show');
-		}
+	'click #first-ld-link': function(e, t) {
+		$('html,body').animate({
+			scrollTop: $("#survey-wrapper").offset().top - 46
+		}, 'slow');
+		e.preventDefault();
 	}
 });
 
@@ -76,12 +78,144 @@ Template.homeWrapper.events({
 	},
 	'submit #transition-survey-form': function(e, t) {
 		e.preventDefault();
+	},
+	'click button.form-submit': function(e, t) {
+		$('#transition-survey-form').formValidation({
+			framework: 'bootstrap',
+			icon: {
+				valid: 'glyphicon glyphicon-ok',
+				invalid: 'glyphicon glyphicon-remove',
+				validating: 'glyphicon glyphicon-refresh'
+			},
+			err: {
+				// You can set it to popover
+				container: 'tooltip'
+			},
+			fields: {
+				name: {
+					validators: {
+						notEmpty: {
+							message: 'The name is required'
+						}
+					}
+				},
+				email: {
+					validators: {
+						notEmpty: {
+							message: 'The email address is required'
+						},
+						emailAddress: {
+							message: 'The input is not a valid email address'
+						}
+					}
+				},
+				branch: {
+					validators: {
+						notEmpty: {
+							message: 'The service branch is required'
+						}
+					}
+				},
+				designator: {
+					validators: {
+						notEmpty: {
+							message: 'The designator is required'
+						}
+					}
+				},
+				paygrade: {
+					validators: {
+						notEmpty: {
+							message: 'The paygrade is required'
+						}
+					}
+				},
+				separate: {
+					trigger: 'blur',
+					validators: {
+						notEmpty: {
+							message: 'The date of separated is required'
+						},
+						date: {
+							format: 'MM/DD/YYYY',
+							message: 'The date of separated is not valid'
+						}
+					}
+				},
+				sector: {
+					validators: {
+						notEmpty: {
+							message: 'The job sector is required'
+						}
+					}
+				},
+				position: {
+					validators: {
+						notEmpty: {
+							message: 'The job title/position is required'
+						}
+					}
+				}
+			}
+		})
+		.on('success.form.fv', function(e) {
+			// The e parameter is same as one
+			// in the prevalidate.form.fv event above
+			var data = {
+				name: ucwords($('#set-one input[name="name"]').val()),
+				email: $('#set-one input[name="email"]').val(),
+				questions: [
+					{
+						qid: 'question-01',
+						answer: {
+							branch: ucwords($('#set-one input[name="branch"]').val()),
+							designator: $('#set-one input[name="designator"]').val(),
+							paygrade: $('#set-one input[name="paygrade"]').val()
+						}
+					},
+					{
+						qid: 'question-02',
+						answer: $('#set-one input[name="separate"]').val()
+					},
+					{
+						qid: 'question-03',
+						answer: $('#set-one select[name="sector"]').val()
+					},
+					{
+						qid: 'question-04',
+						answer: ucwords($('#set-one input[name="position"]').val())
+					}
+				],
+				created: new Date()
+			};
+
+			if ($('#set-two').css('display') != 'none') {
+				for (var x = 5; x < 20; x++) {
+					if (x < 10) {
+						x = '0' + x;
+					}
+
+					if ($.trim($('#set-two #question-'+x).val()) != '') {
+						var o = {
+							qid: 'question-'+x,
+							answer: $('#set-two #question-'+x).val()
+						}
+
+						data.questions.push(o);
+					}
+				}
+			}
+
+			Meteor.call('addSurvey', data, function(err, res) {
+				window.location.href = '/thank-you';
+			});
+		});
 	}
 });
 
 Template.hSurveyFormSet1.events({
 	'click #form-do-more': function(e, t) {
-		$('#transition-survey-form').formValidation({
+		var x = $('#transition-survey-form').formValidation({
 			framework: 'bootstrap',
 			icon: {
 				valid: 'glyphicon glyphicon-ok',
@@ -162,6 +296,106 @@ Template.hSurveyFormSet1.events({
 			$('#transition-survey-form #set-two button')
 			.attr('disabled', false)
 			.removeClass('disabled');
+		})
+		.formValidation('validate');
+	},
+
+});
+
+Template.contactWrapper.events({
+	'submit #contact-form': function(e) {
+		e.preventDefault();
+
+		$('#contact-form').formValidation({
+			framework: 'bootstrap',
+			icon: {
+				valid: 'glyphicon glyphicon-ok',
+				invalid: 'glyphicon glyphicon-remove',
+				validating: 'glyphicon glyphicon-refresh'
+			},
+			err: {
+				container: 'tooltip'
+			},
+			fields: {
+				name: {
+					validators: {
+						notEmpty: {
+							message: 'The name is required'
+						}
+					}
+				},
+				email: {
+					validators: {
+						notEmpty: {
+							message: 'The email address is required'
+						},
+						emailAddress: {
+							message: 'The input is not a valid email address'
+						}
+					}
+				},
+				subject: {
+					validators: {
+						notEmpty: {
+							message: 'The subject is required'
+						}
+					}
+				},
+				message: {
+					validators: {
+						notEmpty: {
+							message: 'The message is required'
+						}
+					}
+				}
+			}
+		})
+		.on('success.form.fv', function(e) {
+			var self = $(this);
+
+			self.find('button').attr('disabled', true);
+			self.find('.loader').removeClass('hide');
+
+			var formData = {
+				name: ucwords(self.find('input[name="name"]').val()),
+				email: self.find('input[name="email"]').val(),
+				subject: self.find('input[name="subject"]').val(),
+				message: self.find('textarea[name="message"]').val()
+			};
+
+			//get the captcha data
+			var captchaData = grecaptcha.getResponse();
+
+			Meteor.call('contactFormSubmission', formData, captchaData, function(error, res) {
+				self.find('.loader').addClass('hide');
+
+				if (error) {				
+					self.find('.helper-block.captcha-errors').html('<p>'+res.message+'</p>');
+
+					self.find('button').removeClass('disabled')
+					.attr('disabled', false);
+
+				} else if (res.status == 400) {
+					self.find('.helper-block.captcha-errors').html('<p>'+res.message+'</p>');
+
+					self.find('button').removeClass('disabled')
+					.attr('disabled', false);
+
+				} else if (res.status == 200) {
+					self.find('.helper-block.success').html('<p>'+res.message+'</p>');
+					window.setTimeout(function() {
+						window.location.reload();
+					}, 1000);
+				} else {
+					self.find('.helper-block.error').html('<p>'+res.message+'</p>');
+
+					self.find('button').removeClass('disabled')
+					.attr('disabled', false);
+				}
+
+				// reset the captcha
+				grecaptcha.reset();
+			});
 		})
 		.formValidation('validate');
 	}
@@ -266,142 +500,15 @@ Template.homeWrapper.rendered = function() {
 
 Template.hSurveyFormSet1.rendered = function() {
 	$('.datepicker').datepicker();
-
-	$('#transition-survey-form').formValidation({
-		framework: 'bootstrap',
-		icon: {
-			valid: 'glyphicon glyphicon-ok',
-			invalid: 'glyphicon glyphicon-remove',
-			validating: 'glyphicon glyphicon-refresh'
-		},
-		err: {
-			// You can set it to popover
-			container: 'tooltip'
-		},
-		fields: {
-			name: {
-				validators: {
-					notEmpty: {
-						message: 'The name is required'
-					}
-				}
-			},
-			email: {
-				validators: {
-					notEmpty: {
-						message: 'The email address is required'
-					},
-					emailAddress: {
-						message: 'The input is not a valid email address'
-					}
-				}
-			},
-			branch: {
-				validators: {
-					notEmpty: {
-						message: 'The service branch is required'
-					}
-				}
-			},
-			designator: {
-				validators: {
-					notEmpty: {
-						message: 'The designator is required'
-					}
-				}
-			},
-			paygrade: {
-				validators: {
-					notEmpty: {
-						message: 'The paygrade is required'
-					}
-				}
-			},
-			separate: {
-				trigger: 'blur',
-				validators: {
-					notEmpty: {
-						message: 'The date of separated is required'
-					},
-					date: {
-						format: 'MM/DD/YYYY',
-						message: 'The date of separated is not valid'
-					}
-				}
-			},
-			sector: {
-				validators: {
-					notEmpty: {
-						message: 'The job sector is required'
-					}
-				}
-			},
-			position: {
-				validators: {
-					notEmpty: {
-						message: 'The job title/position is required'
-					}
-				}
-			}
-		}
-	})
-	.on('success.form.fv', function(e) {
-		// The e parameter is same as one
-		// in the prevalidate.form.fv event above
-		var data = {
-			name: ucwords($('#set-one input[name="name"]').val()),
-			email: $('#set-one input[name="email"]').val(),
-			questions: [
-				{
-					qid: 'question-01',
-					answer: {
-						branch: ucwords($('#set-one input[name="branch"]').val()),
-						designator: $('#set-one input[name="designator"]').val(),
-						paygrade: $('#set-one input[name="paygrade"]').val()
-					}
-				},
-				{
-					qid: 'question-02',
-					answer: $('#set-one input[name="separate"]').val()
-				},
-				{
-					qid: 'question-03',
-					answer: $('#set-one select[name="sector"]').val()
-				},
-				{
-					qid: 'question-04',
-					answer: ucwords($('#set-one input[name="position"]').val())
-				}
-			],
-			created: new Date()
-		};
-
-		if ($('#set-two').css('display') != 'none') {
-			for (var x = 5; x < 20; x++) {
-				if (x < 10) {
-					x = '0' + x;
-				}
-
-				if ($.trim($('#set-two #question-'+x).val()) != '') {
-					var o = {
-						qid: 'question-'+x,
-						answer: $('#set-two #question-'+x).val()
-					}
-
-					data.questions.push(o);
-				}
-			}
-		}
-
-		Meteor.call('addSurvey', data, function(err, res) {
-			window.location.href = '/thank-you';
-		});
-	});
 }
 
 var sPosition = window.pageYOffset; // should start at 0
 
 Meteor.startup(function() {
+	reCAPTCHA.config({
+		publickey: '6LftoBUTAAAAAL1EZImkjQ5yATwIE33WtCa1wuKl'
+	});
+
 	// Create cross browser requestAnimationFrame method:
 	window.requestAnimationFrame = window.requestAnimationFrame
 	 || window.mozRequestAnimationFrame
