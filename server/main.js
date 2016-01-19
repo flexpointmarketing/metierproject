@@ -42,7 +42,7 @@ Meteor.methods({
 			// this.unblock();
 
 			Email.send({
-				to: 'flexpoint.nestora@gmail.com',
+				to: 'metier@flexpointmarketing.com',
 				from: formData.email,
 				subject: formData.subject,
 				html: body
