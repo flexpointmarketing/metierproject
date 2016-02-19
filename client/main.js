@@ -166,7 +166,7 @@ Template.homeWrapper.events({
 				email: $('#set-one input[name="email"]').val(),
 				questions: [
 					{
-						qid: 'question-01',
+						qid: 'question01',
 						answer: {
 							branch: ucwords($('#set-one input[name="branch"]').val()),
 							designator: $('#set-one input[name="designator"]').val(),
@@ -174,15 +174,15 @@ Template.homeWrapper.events({
 						}
 					},
 					{
-						qid: 'question-02',
+						qid: 'question02',
 						answer: $('#set-one input[name="separate"]').val()
 					},
 					{
-						qid: 'question-03',
+						qid: 'question03',
 						answer: $('#set-one select[name="sector"]').val()
 					},
 					{
-						qid: 'question-04',
+						qid: 'question04',
 						answer: ucwords($('#set-one input[name="position"]').val())
 					}
 				],
@@ -195,10 +195,10 @@ Template.homeWrapper.events({
 						x = '0' + x;
 					}
 
-					if ($.trim($('#set-two #question-'+x).val()) != '') {
+					if ($.trim($('#set-two #question'+x).val()) != '') {
 						var o = {
-							qid: 'question-'+x,
-							answer: $('#set-two #question-'+x).val()
+							qid: 'question'+x,
+							answer: $('#set-two #question'+x).val()
 						}
 
 						data.questions.push(o);
@@ -404,63 +404,63 @@ Template.contactWrapper.events({
 Template.hSurveyFormSet2.helpers({
 	questions: [
 		{
-			qid: 'question-05',
+			qid: 'question05',
 			question: '5. Describe how you got to this job/position and what from your military experience set you up to be successful?'
 		},
 		{
-			qid: 'question-06',
+			qid: 'question06',
 			question: '6. What were weaknesses from military experience that you had to overcome to be successful in this career?'
 		},
 		{
-			qid: 'question-07',
+			qid: 'question07',
 			question: '7. Describe that initial transition process and where you found yourself stuck?'
 		},
 		{
-			qid: 'question-08',
+			qid: 'question08',
 			question: '8. How did you overcome that obstacle?'
 		},
 		{
-			qid: 'question-09',
+			qid: 'question09',
 			question: '9. How did you find your passion?'
 		},
 		{
-			qid: 'question-10',
+			qid: 'question10',
 			question: '10. What is your future path?'
 		},
 		{
-			qid: 'question-11',
+			qid: 'question11',
 			question: '11. Do you have a mentor and if so, how did you plug into your career professional network?'
 		},
 		{
-			qid: 'question-12',
+			qid: 'question12',
 			question: '12. Did your social networks help you find your job?'
 		},
 		{
-			qid: 'question-13',
+			qid: 'question13',
 			question: '13. How did you sustain yourself financially in the short term while you transitioned?'
 		},
 		{
-			qid: 'question-14',
+			qid: 'question14',
 			question: '14. Are you willing to write an article on your experience to share with other veterans?'
 		},
 		{
-			qid: 'question-15',
+			qid: 'question15',
 			question: '15. If not, are you willing to do a 3 minute video?'
 		},
 		{
-			qid: 'question-16',
+			qid: 'question16',
 			question: '16. Are you willing to provide your information to assist other veterans following your path in the future?'
 		},
 		{
-			qid: 'question-17',
+			qid: 'question17',
 			question: '17. When you separated, what degrees or vocational training did you have?'
 		},
 		{
-			qid: 'question-18',
+			qid: 'question18',
 			question: '18. Was this education and training a prerequisite for the job you now have?'
 		},
 		{
-			qid: 'question-19',
+			qid: 'question19',
 			question: '19. Can you name one or two friends in your industry that have success stories that might be willing to share their story?'
 		}
 	]
