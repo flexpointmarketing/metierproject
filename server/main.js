@@ -128,7 +128,7 @@ Meteor.methods({
 		}
 
 		Email.send({
-			to: 'paulg@flexpointmarkeitng.com',
+			to: 'paulg@flexpointmarketing.com',
 			from: data.name + " <"+data.email+">",
 			subject: 'Transition Survey - New Form Submission',
 			html: body
